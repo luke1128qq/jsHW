@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>反轉字串</title>
+    </head>
+
+    <body>
+        <script>
+            let ori = "大牛比較懶";
+            let arr = ori.split("");
+            let len = arr.length;
+            let temp = "";
+
+            for (let i = 0, max = parseInt(len / 2); i < max; i++) {
+                temp = arr[i];
+                arr[i] = arr[len - (i + 1)];
+                arr[len - (i + 1)] = temp;
+            }
+
+            console.log(arr.join(""));
+        </script>
+    </body>
+</html>

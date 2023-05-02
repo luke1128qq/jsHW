@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>拿石頭遊戲</title>
+    </head>
+    <body>
+        <button id="btn">安安你好</button>
+        <hr></hr>
+        <script>
+            let bt = document.querySelector("#btn");
+            bt.addEventListener("mouseover", function () {
+                this.innerText = "住哪幾歲";
+                this.style.color = "green";
+                this.style.backgroundColor = "yellow";
+            });
+            bt.addEventListener("mouseout", function () {
+                this.innerText = "安安你好";
+                this.style.color = "black";
+                this.style.backgroundColor = "";
+            });
+            bt.addEventListener("mousedown",function(){
+                this.style.fontSize = "50px";
+            })
+            bt.addEventListener("mouseup",function(){
+                this.style.fontSize = "13px";
+            })
+        </script>
+    </body>
+</html>
