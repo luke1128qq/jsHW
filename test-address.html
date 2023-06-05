@@ -1,132 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>處理JSON</title>
+        <script src="address.js"></script>
+        <style>
+            table {
+                border-collapse: collapse;
+                margin-top: 50px;
+            }
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>處理JSON</title>
-    <script src="address.js"></script>
-    <style>
-        table {
-            border-collapse: collapse;
-            margin-top: 50px;
-        }
+            th {
+                border: 1px solid black;
+                width: 150px;
+                margin: 0;
+                background-color: #7cdaff;
+            }
 
-        th {
-            border: 1px solid black;
-            width: 150px;
-            margin: 0;
-            background-color: #7cdaff;
-        }
+            td {
+                border: 1px solid black;
+                text-align: center;
+                margin: 0;
+                padding: 5px;
+                height: 50px;
+                background-color: #defff2;
+            }
 
-        td {
-            border: 1px solid black;
-            text-align: center;
-            margin: 0;
-            padding: 5px;
-            height: 50px;
-            background-color: #defff2;
-        }
+            select {
+                width: 80px;
+            }
+        </style>
+    </head>
 
-        select {
-            width: 80px;
-        }
-    </style>
-</head>
+    <body>
+        <label for="selCity">城市</label>
+        <select name="" id="selCity"></select>
 
-<body>
+        <label for="selArea">鄉鎮區</label>
+        <select name="" id="selArea"></select>
 
-    <label for="selCity">城市</label>
-    <select name="" id="selCity"></select>
+        <label for="selRoad">街道</label>
+        <select name="" id="selRoad"></select>
 
-    <label for="selArea">鄉鎮區</label>
-    <select name="" id="selArea"></select>
+        <table id="ta">
+            <thead id="th">
+                <tr>
+                    <th>城市名</th>
+                    <th>城市英文名</th>
+                    <th id="go">區名</th>
+                </tr>
+            </thead>
 
-    <label for="selRoad">街道</label>
-    <select name="" id="selRoad"></select>
+            <tbody id="tb"></tbody>
+        </table>
 
-    <table id="ta">
-        <thead id="th">
-            <tr>
-                <th>城市名</th>
-                <th>城市英文名</th>
-                <th id="go">區名</th>
-            </tr>
-        </thead>
+        <!-- <div id="re"></div> -->
 
-        <tbody id="tb">
+        <script>
+            // json要在網頁上印出的話要先轉成字串
+            // json要在devtool上印出的話可以是原本的物件也可以是字串
+            // JSON.stringify(data) 把JSON物件轉成字串
 
-        </tbody>
-    </table>
+            console.log(data);
 
-    <!-- <div id="re"></div> -->
+            // for (let i = 0; i < data.length; i++) {
+            //     let cityStr = data[i].CityName;
+            //     for (let j = 0, max = data[i].AreaList.length; j < max; j++) {
+            //         document.querySelector("#re").innerHTML += `${data[i].AreaList[j].AreaName}<br>`
+            //     }
+            //     document.querySelector("#re").innerHTML +="<hr>"
+            // }
 
-    <script>
-
-        // json要在網頁上印出的話要先轉成字串
-        // json要在devtool上印出的話可以是原本的物件也可以是字串
-        // JSON.stringify(data) 把JSON物件轉成字串
-
-        console.log(data);
-
-        // for (let i = 0; i < data.length; i++) {
-        //     let cityStr = data[i].CityName;
-        //     for (let j = 0, max = data[i].AreaList.length; j < max; j++) {
-        //         document.querySelector("#re").innerHTML += `${data[i].AreaList[j].AreaName}<br>`
-        //     }
-        //     document.querySelector("#re").innerHTML +="<hr>"
-        // }
-
-        let result = "";
-        let tb = document.querySelector("#tb");
-        data.forEach(city => {
-            result += `
+            let result = "";
+            let tb = document.querySelector("#tb");
+            data.forEach((city) => {
+                result += `
                 <tr>
                     <td>${city.CityName}</td>
                     <td>${city.CityEngName}</td>
                     <td><select>
-                `
-            city.AreaList.forEach(area => {
-                result += `<option>${area.AreaName}</option>`
-            })
+                `;
+                city.AreaList.forEach((area) => {
+                    result += `<option>${area.AreaName}</option>`;
+                });
 
-            result += `</select></td></tr>`
-        })
-        tb.innerHTML = result
+                result += `</select></td></tr>`;
+            });
+            tb.innerHTML = result;
 
+            let result2 = "";
+            let selCity = document.querySelector("#selCity");
+            data.forEach((city) => {
+                result2 += `<option>${city.CityName}</option>`;
+            });
+            selCity.innerHTML = result2;
 
-        let result2 = "";
-        let selCity = document.querySelector("#selCity");
-        data.forEach(city => {
-            result2 += `<option>${city.CityName}</option>`
-        })
-        selCity.innerHTML = result2
+            let result3 = "";
+            let selArea = document.querySelector("#selArea");
+            data.forEach((city) => {
+                city.AreaList.forEach((area) => {
+                    result3 += `<option>${area.AreaName}</option>`;
+                });
+            });
+            selArea.innerHTML = result3;
 
-
-        let result3 = "";
-        let selArea = document.querySelector("#selArea");
-        data.forEach(city => {
-            city.AreaList.forEach(area => {
-                result3 += `<option>${area.AreaName}</option>`
-            })
-        })
-        selArea.innerHTML = result3
-
-
-        let result4 = "";
-        let selRoad = document.querySelector("#selRoad");
-        data.forEach(city => {
-            city.AreaList.forEach(area => {
-                area.RoadList.forEach(road => {
-                    result4 += `<option>${road.RoadName}</option>`
-                })
-            })
-        })
-        selRoad.innerHTML = result4
-
-    </script>
-
-</body>
-
+            let result4 = "";
+            let selRoad = document.querySelector("#selRoad");
+            data.forEach((city) => {
+                city.AreaList.forEach((area) => {
+                    area.RoadList.forEach((road) => {
+                        result4 += `<option>${road.RoadName}</option>`;
+                    });
+                });
+            });
+            selRoad.innerHTML = result4;
+        </script>
+    </body>
 </html>

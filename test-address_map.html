@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="address.js"></script>
+    </head>
+    <body>
+        <select name="" id="sel1"></select>
+        <select name="" id="sel2"></select>
+        <select name="" id="sel3"></select>
+
+        <script>
+            console.log(data);
+
+            let sel1 = document.querySelector("#sel1");
+            let data1 = data.map(
+                (v, i) => `<option value="${v.CityName}">${v.CityName}</option>`
+            );
+            sel1.innerHTML = data1.join("");
+
+            let sel2 = document.querySelector("#sel2");
+            let data2 = data[0].AreaList.map(
+                (v, i) => `<option value="${v.ZipCode}">${v.AreaName}</option>`
+            );
+            sel2.innerHTML = data2.join("");
+
+            let sel3 = document.querySelector("#sel3");
+            let data3 = data[0].AreaList[0].RoadList.map(
+                (v, i) => `<option value="${v.RoadName}">${v.RoadName}</option>`
+            );
+            sel3.innerHTML = data3.join("");
+
+            sel1.addEventListener("change", () => {
+                let cityn = data.filter((c) => c.CityName === sel1.value);
+
+                let data2 = cityn[0].AreaList.map(
+                    (v) => `<option value="${v.ZipCode}">${v.AreaName}</option>`
+                );
+                sel2.innerHTML = data2.join("");
+            });
+
+            sel2.addEventListener("change", () => {
+                let cityn = data.filter((c) => c.CityName === sel1.value);
+                let citya = cityn[0].AreaList.filter(
+                    (a) => a.ZipCode === sel2.value
+                );
+
+                let data3 = citya[0].RoadList.map(
+                    (v) =>
+                        `<option value="${v.RoadName}">${v.RoadName}</option>`
+                );
+                sel3.innerHTML = data3.join("");
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="div"></div>
+    </body>
+    <script>
+        let div = document.querySelector("div");
+        class Stand {
+            constructor(master, skill, point) {
+                this.master = master;
+                this.skill = skill;
+                this.point = point;
+            }
+            ponbai() {
+                return `這尊替身的持有者是${this.master}，擁有${this.skill}的力量`;
+            }
+        }
+
+        const theWorld = new Stand("迪奧", "暫停時間", 8);
+        div.innerHTML = theWorld.ponbai();
+    </script>
+</html>

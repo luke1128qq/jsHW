@@ -73,28 +73,51 @@
         </div>
         <script>
             console.log(datas);
-            let len = datas.infos.length;
             let attr = "";
-
-            for (let i = 0; i < len; i++) {
-                let Nam = datas.infos[i].Name;
-                let Name = Nam.slice(0, 15);
-                let Tol = datas.infos[i].Toldescribe;
-                let Des = Tol.slice(0, 100) + "...";
-                let Add = datas.infos[i].Add;
-                let Last = datas.infos[i].Changetime;
-                let Tick = datas.infos[i].Ticketinfo;
-                let Tic = Tick.slice(0, 13);
-
+            let arr = datas.infos.map((val) => {
+                let {
+                    Name: na,
+                    Toldescribe: to,
+                    Add: ad,
+                    Changetime: ch,
+                    Ticketinfo: ti,
+                } = val;
                 attr += `
-                    <div class="big border border-secondary-subtle rounded">
-                        <div class="top w-100"><a href="#">${Name}</a></div>
-                        <div class="w-100 mx-3 mt-2"><div>${Des}</div></div>
-                        <div class="w-100 mx-3 mt-3">門票：${Tic}</div>
-                        <div class="w-100 mx-3 mt-3">地址：${Add}</div>
-                        <div class="w-100 bt mt-4"><div class="but">最後更新時間：${Last}</div></div>
-                    </div>`;
-            }
+                     <div class="big border border-secondary-subtle rounded">
+                         <div class="top w-100">
+                            <a href="#">${na.slice(0, 15)}</a>
+                            </div>
+                         <div class="w-100 mx-3 mt-2">
+                            <div>${to.slice(0, 100) + "..."}</div>
+                            </div>
+                         <div class="w-100 mx-3 mt-3">門票：${ti}</div>
+                         <div class="w-100 mx-3 mt-3">地址：${ad}</div>
+                         <div class="w-100 bt mt-4"><div class="but">最後更新時間：${ch}</div></div>
+                     </div>`;
+            });
+
+            // const len = datas.infos.length;
+            // let attr = "";
+
+            // for (let i = 0; i < len; i++) {
+            //     const Nam = datas.infos[i].Name;
+            //     const Name = Nam.slice(0, 15);
+            //     const Tol = datas.infos[i].Toldescribe;
+            //     const Des = Tol.slice(0, 100) + "...";
+            //     const Add = datas.infos[i].Add;
+            //     const Last = datas.infos[i].Changetime;
+            //     const Tick = datas.infos[i].Ticketinfo;
+            //     let Tic = Tick.slice(0, 13);
+
+            //     attr += `
+            //         <div class="big border border-secondary-subtle rounded">
+            //             <div class="top w-100"><a href="#">${Name}</a></div>
+            //             <div class="w-100 mx-3 mt-2"><div>${Des}</div></div>
+            //             <div class="w-100 mx-3 mt-3">門票：${Tic}</div>
+            //             <div class="w-100 mx-3 mt-3">地址：${Add}</div>
+            //             <div class="w-100 bt mt-4"><div class="but">最後更新時間：${Last}</div></div>
+            //         </div>`;
+            // }
             document.querySelector(".row").innerHTML = attr;
         </script>
 
